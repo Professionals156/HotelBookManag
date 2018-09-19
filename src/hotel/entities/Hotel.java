@@ -94,6 +94,11 @@ public long book(Room room, Guest guest,Date arrivalDate, int stayLength, int oc
 			// The booking should be returned from findBookingByConfirmationNumber()
 			return findBookingByConfirmationNumber(booking.getConfirmationNumber()).getConfirmationNumber();
 		}
+
+              // The Booking referenced by confirmationNumber should have a state of CHECKED_IN
+		if(booking.isCheckedIn()){
+			message = String.format("Booking %d has already been checked in", confirmationNumber);
+		}
 		
 		return 0L;		
 	}
