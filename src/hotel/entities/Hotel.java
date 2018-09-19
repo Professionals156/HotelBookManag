@@ -122,6 +122,12 @@ String message = null;
 		}
 
 
+// The Booking referenced by confirmationNumber should have a state of CHECKED_IN
+		if(booking.isCheckedIn()){
+			message = String.format("Booking %d has already been checked in", confirmationNumber);
+		}
+
+
 
 	}
 
