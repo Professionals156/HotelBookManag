@@ -106,6 +106,15 @@ public class Hotel {
 	
 	public void checkin(long confirmationNumber) {
 		// TODO Auto-generated method stub
+
+// throws a RuntimeException if no booking for confirmation number exists
+		Booking booking  = findBookingByConfirmationNumber(confirmationNumber);
+		if (booking.isCheckedIn()) {
+			String mesg = String.format("CheckIn: confirmationNumberEntered : already exists : %s", confirmationNumber);
+			throw new RuntimeException(mesg);
+		}
+
+
 	}
 
 
