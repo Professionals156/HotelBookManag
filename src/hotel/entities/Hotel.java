@@ -115,6 +115,14 @@ public class Hotel {
 		}
 
 
+String message = null;
+		// The Booking referenced by confirmationNumber should be returned by getActiveBookingByRoomId()
+		if(findActiveBookingByRoomId(booking.getRoomId()).isCheckedIn()) {
+			message = String.format("Booking %d has already been checked in", confirmationNumber);
+		}
+
+
+
 	}
 
 
