@@ -84,14 +84,18 @@ public class Hotel {
 		return bookingsByConfirmationNumber.get(confirmationNumber);
 	}
 
-	
-	public long book(Room room, Guest guest, 
-			Date arrivalDate, int stayLength, int occupantNumber,
-			CreditCard creditCard) {
+
+public long book(Room room, Guest guest,Date arrivalDate, int stayLength, int occupantNumber,CreditCard creditCard) {
 		// TODO Auto-generated method stub
+		
+		// A booking should exist for the room (this method should call room.book())
+		Booking booking = room.book(guest, arrivalDate, stayLength, occupantNumber, creditCard);
+		
+		
 		return 0L;		
 	}
 
+	
 	
 	public void checkin(long confirmationNumber) {
 		// TODO Auto-generated method stub
