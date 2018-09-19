@@ -110,6 +110,12 @@ public long book(Room room, Guest guest,Date arrivalDate, int stayLength, int oc
 			String mesg = String.format("CheckIn: confirmationNumberEntered : already exists : %s", confirmationNumber);
 			throw new RuntimeException(mesg);
 		}
+             String message = null;
+		// The Booking referenced by confirmationNumber should be returned by getActiveBookingByRoomId()
+		if(findActiveBookingByRoomId(booking.getRoomId()).isCheckedIn()) {
+			message = String.format("Booking %d has already been checked in", confirmationNumber);
+		}
+
 	}
 
 
