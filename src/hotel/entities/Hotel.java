@@ -94,6 +94,12 @@ public class Hotel {
 		// A booking should exist for the room (this method should call room.book())
 		Booking booking = room.book(guest, arrivalDate, stayLength, occupantNumber, creditCard);
 
+             // The room should not be available for the specified arrivalDate and staylength
+		if(booking.getArrivalDate() != arrivalDate && booking.getStayLength() != stayLength) {
+			// The booking should be returned from findBookingByConfirmationNumber()
+			return findBookingByConfirmationNumber(booking.getConfirmationNumber()).getConfirmationNumber();
+		}
+
 		return 0L;		
 	}
 
