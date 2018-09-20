@@ -130,6 +130,11 @@ public long book(Room room, Guest guest,Date arrivalDate, int stayLength, int oc
 	// throws a RuntimeException if no active booking associated with the room identified by roomID can be found
 		Booking booking = findActiveBookingByRoomId(roomId);
 
+if (booking.isPending()) {
+			String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
+			throw new RuntimeException(mesg);
+		}else
+
 
 	}
 
