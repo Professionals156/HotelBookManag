@@ -154,6 +154,11 @@ if (booking.isPending()) {
 			throw new RuntimeException(mesg);
 		}else
 
+// The Booking referenced by confirmationNumber should have a state of CHECKED_OUT
+		if (!booking.isPending()) {
+			
+			String message=null;
+
 
 	}
 
