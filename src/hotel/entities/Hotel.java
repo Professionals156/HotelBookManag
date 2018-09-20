@@ -134,6 +134,11 @@ if (booking.isPending()) {
 			String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
 			throw new RuntimeException(mesg);
 		}else
+           
+          // A ServiceCharge should have been added to the active booking.
+		if (!booking.isPending()) {
+			booking.addServiceCharge(serviceType, cost);
+		}
 
 
 	}
