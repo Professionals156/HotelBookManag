@@ -165,6 +165,9 @@ if (booking.isPending()) {
 		if (!booking.isPending()) {
 			
 			String message=null;
+if(booking.isCheckedOut()) {
+				message = String.format("Booking %d has already been checked out", roomId);
+			}
 
 
 
