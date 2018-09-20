@@ -146,6 +146,15 @@ if (booking.isPending()) {
 	
 	public void checkout(int roomId) {
 		// TODO Auto-generated method stub
+
+// throws a RuntimeException if no active booking associated with the room identified by roomID can be found
+		Booking booking = findActiveBookingByRoomId(roomId);
+		if (booking.isPending()) {
+			String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
+			throw new RuntimeException(mesg);
+		}else
+
+
 	}
 
 
