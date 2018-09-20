@@ -134,6 +134,10 @@ String message = null;
 
 	public void addServiceCharge(int roomId, ServiceType serviceType, double cost) {
 		// TODO Auto-generated method stub
+
+// throws a RuntimeException if no active booking associated with the room identified by roomID can be found
+		Booking booking = findActiveBookingByRoomId(roomId);
+
 	}
 
 	
