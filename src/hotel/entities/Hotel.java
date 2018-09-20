@@ -161,6 +161,11 @@ if (booking.isPending()) {
 			String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
 			throw new RuntimeException(mesg);
 		}else
+// The Booking referenced by confirmationNumber should have a state of CHECKED_OUT
+		if (!booking.isPending()) {
+			
+			String message=null;
+
 
 
 	}
