@@ -133,6 +133,7 @@ public class Booking {
 
 
 	public void checkIn() {
+		
 		// TODO Auto-generated method stub
 	}
 
