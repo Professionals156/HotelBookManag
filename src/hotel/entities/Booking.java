@@ -144,7 +144,12 @@ public class Booking {
 
 	public void addServiceCharge(ServiceType serviceType, double cost) {
 
-		// TODO Auto-generated method stub
+		if (state != State.CHECKED_IN) {
+            String mesg = String.format("Booking: addServiceCharge : bad state : %s", new Object[] { state });
+            throw new RuntimeException(mesg);
+        }
+        ServiceCharge charge = new ServiceCharge(serviceType, cost);
+        charges.add(charge);
 	}
 
 
