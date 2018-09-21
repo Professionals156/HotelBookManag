@@ -133,17 +133,19 @@ public class Booking {
 
 
 	public void checkIn() {
-		
+
 		// TODO Auto-generated method stub
 	}
 
 
 	public void addServiceCharge(ServiceType serviceType, double cost) {
+
 		// TODO Auto-generated method stub
 	}
 
 
 	public void checkOut() {
+		
 		// TODO Auto-generated method stub
 	}
 
