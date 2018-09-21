@@ -8,7 +8,7 @@ import java.util.List;
 
 import hotel.credit.CreditCard;
 import hotel.utils.IOUtils;
-
+//class start
 public class Booking {
 	
 	private enum State {PENDING, CHECKED_IN, CHECKED_OUT};
@@ -133,8 +133,12 @@ public class Booking {
 
 
 	public void checkIn() {
-
-		// TODO Auto-generated method stub
+		if (state != State.PENDING) {
+            String mesg = String.format("Booking: checkIn : bad state : %s", new Object[] { state });
+            throw new RuntimeException(mesg);
+        }
+        room.checkin();
+        state = State.CHECKED_IN;
 	}
 
 
@@ -145,8 +149,9 @@ public class Booking {
 
 
 	public void checkOut() {
-		
+
 		// TODO Auto-generated method stub
 	}
 
 }
+//class end
