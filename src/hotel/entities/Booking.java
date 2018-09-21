@@ -133,6 +133,7 @@ public class Booking {
 
 
 	public void checkIn() {
+		//check checkin status
 		if (state != State.PENDING) {
             String mesg = String.format("Booking: checkIn : bad state : %s", new Object[] { state });
             throw new RuntimeException(mesg);
@@ -143,7 +144,7 @@ public class Booking {
 
 
 	public void addServiceCharge(ServiceType serviceType, double cost) {
-
+		//check checkin status
 		if (state != State.CHECKED_IN) {
             String mesg = String.format("Booking: addServiceCharge : bad state : %s", new Object[] { state });
             throw new RuntimeException(mesg);
@@ -154,6 +155,7 @@ public class Booking {
 
 
 	public void checkOut() {
+		//check checkin status
 		if (state != State.CHECKED_IN) {
             String mesg = String.format("Booking: checkOut : bad state : %s", new Object[] { state });
             throw new RuntimeException(mesg);
