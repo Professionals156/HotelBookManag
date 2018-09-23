@@ -135,32 +135,31 @@ public class BookingCTL {
 		}
 	}
 
-public void creditDetailsEntered(CreditCardType type, int number, int ccv) {
-// TODO Auto-generated method stub
-if(state != State.CREDIT) {
-//throws a RuntimeException if state is not CREDIT
-String mesg = String.format("BookingCTL: creditDetailsEntered : bad state : %s", state);
-throw new RuntimeException(mesg);
-}
-// creates a new CreditCard
-CreditCard creditCard = new CreditCard(type, number, ccv);
+        public void creditDetailsEntered(CreditCardType type, int number, int ccv) {
+    // TODO Auto-generated method stub
+            if (state != State.CREDIT) {
+    //throws a RuntimeException if state is not CREDIT
+                String mesg = String.format("BookingCTL: creditDetailsEntered : bad state : %s", state);
+                throw new RuntimeException(mesg);
+            }
+    // creates a new CreditCard
+            CreditCard creditCard = new CreditCard(type, number, ccv);
 
-
-// if approved
-if(CreditAuthorizer.getInstance().authorize(creditCard, cost)) {
-// calls hotel.book()
-hotel.book(room, guest, arrivalDate, ccv, number, creditCard);
-// calls UI.displayConfirmedBooking()
-bookingUI.displayConfirmedBooking(room.getDescription(), room.getId(), arrivalDate, ccv, guest.getName(), creditCard.getVendor(), creditCard.getNumber(), ccv, creditCard.getNumber());
-// sets state to COMPLETED
-state = State.COMPLETED;
-// sets UI state to COMPLETED
-bookingUI.setState(BookingUI.State.COMPLETED);
-}else {
-// calls UI.displayMessage with credit not authorised message
-bookingUI.displayMessage("Credit card is not authorised");
-}
-
+    // if approved
+            if (CreditAuthorizer.getInstance().authorize(creditCard, cost)) {
+    // calls hotel.book()
+                hotel.book(room, guest, arrivalDate, ccv, number, creditCard);
+    // calls UI.displayConfirmedBooking()
+                bookingUI.displayConfirmedBooking(room.getDescription(), room.getId(), arrivalDate, ccv, guest.getName(), creditCard.getVendor(), creditCard.getNumber(), ccv, creditCard.getNumber());
+    // sets state to COMPLETED
+                state = State.COMPLETED;
+    // sets UI state to COMPLETED
+                bookingUI.setState(BookingUI.State.COMPLETED);
+            } else {
+    // calls UI.displayMessage with credit not authorised message
+                bookingUI.displayMessage("Credit card is not authorised");
+            }
+        }
 
 	public void cancel() {
 		IOUtils.trace("BookingCTL: cancel");

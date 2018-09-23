@@ -104,67 +104,57 @@ public long book(Room room, Guest guest,Date arrivalDate, int stayLength, int oc
 	}
 
 
-	
-	
-	public void checkin(long confirmationNumber) {
-		// TODO Auto-generated method stub
-            
-              // throws a RuntimeException if no booking for confirmation number exists
-		Booking booking  = findBookingByConfirmationNumber(confirmationNumber);
-		if (booking.isCheckedIn()) {
-			String mesg = String.format("CheckIn: confirmationNumberEntered : already exists : %s", confirmationNumber);
-			throw new RuntimeException(mesg);
-		}
-             String message = null;
-		// The Booking referenced by confirmationNumber should be returned by getActiveBookingByRoomId()
-		if(findActiveBookingByRoomId(booking.getRoomId()).isCheckedIn()) {
-			message = String.format("Booking %d has already been checked in", confirmationNumber);
-		}
+	    public void checkin(long confirmationNumber) {
+                // TODO Auto-generated method stub
 
-	}
+                // throws a RuntimeException if no booking for confirmation number exists
+                Booking booking = findBookingByConfirmationNumber(confirmationNumber);
+                if (booking.isCheckedIn()) {
+                    String mesg = String.format("CheckIn: confirmationNumberEntered : already exists : %s", confirmationNumber);
+                    throw new RuntimeException(mesg);
+                }
+                String message = null;
+                // The Booking referenced by confirmationNumber should be returned by getActiveBookingByRoomId()
+                if (findActiveBookingByRoomId(booking.getRoomId()).isCheckedIn()) {
+                    message = String.format("Booking %d has already been checked in", confirmationNumber);
+                }
 
+            }
 
-	public void addServiceCharge(int roomId, ServiceType serviceType, double cost) {
-		// TODO Auto-generated method stub
+            public void addServiceCharge(int roomId, ServiceType serviceType, double cost) {
+                // TODO Auto-generated method stub
 
-	// throws a RuntimeException if no active booking associated with the room identified by roomID can be found
-		Booking booking = findActiveBookingByRoomId(roomId);
+                // throws a RuntimeException if no active booking associated with the room identified by roomID can be found
+                Booking booking = findActiveBookingByRoomId(roomId);
 
-if (booking.isPending()) {
-			String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
-			throw new RuntimeException(mesg);
-		}else
-           
-          // A ServiceCharge should have been added to the active booking.
-		if (!booking.isPending()) {
-			booking.addServiceCharge(serviceType, cost);
-		}
+                if (booking.isPending()) {
+                    String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
+                    throw new RuntimeException(mesg);
+                } else // A ServiceCharge should have been added to the active booking.
+                if (!booking.isPending()) {
+                    booking.addServiceCharge(serviceType, cost);
+                }
 
+            }
 
-	}
+            public void checkout(int roomId) {
+                // TODO Auto-generated method stub
 
-	
-	public void checkout(int roomId) {
-		// TODO Auto-generated method stub
+                // throws a RuntimeException if no active booking associated with the room identified by roomID can be found
+                Booking booking = findActiveBookingByRoomId(roomId);
+                if (booking.isPending()) {
+                    String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
+                    throw new RuntimeException(mesg);
+                } else // The Booking referenced by confirmationNumber should have a state of CHECKED_OUT
+                if (!booking.isPending()) {
 
-// throws a RuntimeException if no active booking associated with the room identified by roomID can be found
-		Booking booking = findActiveBookingByRoomId(roomId);
-		if (booking.isPending()) {
-			String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
-			throw new RuntimeException(mesg);
-		}else
+                    String message = null;
 
-// The Booking referenced by confirmationNumber should have a state of CHECKED_OUT
-		if (!booking.isPending()) {
-			
-			String message=null;
+                    if (booking.isCheckedOut()) {
+                        message = String.format("Booking %d has already been checked out", roomId);
+                    }
 
-if(booking.isCheckedOut()) {
-				message = String.format("Booking %d has already been checked out", roomId);
-			}
+                }
 
-
-	}
-
-
-}
+            }
+        }
