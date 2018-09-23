@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author sandun
+ * @author sandun 11634089
  */
 public class DismikaJUnitTest {
     
