@@ -9,7 +9,15 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import hotel.credit.CreditCard;
+import hotel.entities.Booking;
+import hotel.entities.Guest;
+import hotel.entities.Room;
+
 import static org.junit.Assert.*;
+
+import java.util.Date;
 
 /**
  *
@@ -48,12 +56,12 @@ public class AkilaJUnitTest {
         int numberOfOccupants;
         CreditCard creditCard;
 
-        Room myRoom = new Room();
+        Room myRoom = new Room(numberOfOccupants, null);
 
         Booking booking = new Booking(guest, myRoom, bookedArrival, stayLength, numberOfOccupants, creditCard);
         myRoom.checkout(booking);
         boolean expectedResult = true;
-        isReady = myRoom.isReady();
+        boolean isReady = myRoom.isReady();
         assertEquals(expectedResult,isReady);
     
     }
