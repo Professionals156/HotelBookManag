@@ -15,6 +15,7 @@ public class Room {
 	RoomType roomType;
 	List<Booking> bookings;
 	State state;
+	Room room;
 
 	
 	public Room(int id, RoomType roomType) {
@@ -61,7 +62,8 @@ public class Room {
 
 	public Booking book(Guest guest, Date arrivalDate, int stayLength, int numberOfOccupants, CreditCard creditCard) {
 		// TODO Auto-generated method stub
-		Booking myBoking = new Booking(guest, arrivalDate, stayLength, numberOfOccupants, creditCard);
+		
+		Booking myBoking = new Booking(guest, room, arrivalDate, stayLength, numberOfOccupants, creditCard);
  		
 
 		bookings.add(myBoking);
@@ -72,7 +74,7 @@ public class Room {
 	}
 
 
-	public void checkin()  {
+	public void checkin() throws Exception {
 		// TODO Auto-generated method stub
 		
 		if (isReady() != true)
@@ -82,12 +84,12 @@ public class Room {
 	}
 
 
-	public void checkout(Booking booking) throw Exception {
+	public void checkout(Booking booking) throws Exception {
 		// TODO Auto-generated method stub
 		if (isReady() == true) {
 			throw new Exception("room is not occupied");
 		}else{
-			isAvailable.remove(booking);
+			bookings.remove(booking);
 			state = State.READY;
 		}
 	}
