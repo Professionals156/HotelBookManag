@@ -75,7 +75,7 @@ public class Room {
 
 
 	public void checkin() throws Exception {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub v
 		
 		if (isReady() != true)
 			throw new Exception("room is not availble");
