@@ -107,14 +107,14 @@ public class CheckinCTL {
             checkInUI.setState(CheckinUI.State.CANCELLED);
             }
         }
-
+    // Cancel the checking
 	public void cancel() {
 		checkInUI.displayMessage("Checking in cancelled");
 		state = State.CANCELLED;
 		checkInUI.setState(CheckinUI.State.CANCELLED);
 	}
 	
-	
+	// Finished and complete
 	public void completed() {
 		checkInUI.displayMessage("Checking in completed");
 	}
