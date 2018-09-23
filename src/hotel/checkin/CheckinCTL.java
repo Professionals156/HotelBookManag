@@ -80,8 +80,20 @@ public class CheckinCTL {
 
 	
 	public void checkInConfirmed(boolean confirmed) {
-		// TODO Auto-generated method stub
-	}
+// TODO Auto-generated method stub
+// throws a RuntimeException if state is not CONFIRMING
+if (state != State.CHECKING) {
+String mesg = String.format("CheckInCTL: confirmationNumberEntered : bad state : %s", state);
+throw new RuntimeException(mesg);
+}
+// if confirmed
+if(confirmed) {
+// calls hotel.checkin()
+hotel.checkin(confirmationNumber);
+// calls UI.displayMessage() with Checkin confirmed message
+checkInUI.displayMessage("Checking confired");
+// sets state to COMPLETED
+
 
 
 	public void cancel() {
