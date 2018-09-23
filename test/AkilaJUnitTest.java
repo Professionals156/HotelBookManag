@@ -48,13 +48,13 @@ public class AkilaJUnitTest {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void hello() {
+    public void hello() throws Exception {
 
-        Guest guest;
-        Date bookedArrival;
-        int stayLength;
-        int numberOfOccupants;
-        CreditCard creditCard;
+        Guest guest=null;
+        Date bookedArrival = null;
+        int stayLength=0;
+        int numberOfOccupants=0;
+        CreditCard creditCard = null;
 
         Room myRoom = new Room(numberOfOccupants, null);
 
