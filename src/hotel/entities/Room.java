@@ -66,6 +66,8 @@ public class Room {
 
 		bookings.add(myBoking);
 
+		isAvailable(arrivalDate, stayLength);
+
 		return myBoking;		
 	}
 
