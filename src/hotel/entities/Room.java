@@ -61,17 +61,35 @@ public class Room {
 
 	public Booking book(Guest guest, Date arrivalDate, int stayLength, int numberOfOccupants, CreditCard creditCard) {
 		// TODO Auto-generated method stub
-		return null;		
+		Booking myBoking = new Booking(guest, arrivalDate, stayLength, numberOfOccupants, creditCard);
+ 		
+
+		bookings.add(myBoking);
+
+		return myBoking;		
 	}
 
 
-	public void checkin() {
+	public void checkin()  {
 		// TODO Auto-generated method stub
 	}
 
 
-	public void checkout(Booking booking) {
+	public void checkout(Booking booking) throw Exception {
 		// TODO Auto-generated method stub
+
+		for (Guest guest: guests) { 
+   			if (guest.getName() == guestname) { 
+    			Room room = guest.getRoom(); 
+    			if (guest.checkout()) { 
+     				room.setGuest(null); 
+     				room.getSafe().deactivate(); 
+     				room.getSafe().close(); 
+    			} else { 
+     				throw new Exception("Guest couldn't check out"); 
+    			} 
+   			} 
+  		} 
 	}
 
 
