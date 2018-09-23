@@ -80,33 +80,33 @@ public class CheckinCTL {
 
 	
 	public void checkInConfirmed(boolean confirmed) {
-// TODO Auto-generated method stub
-// throws a RuntimeException if state is not CONFIRMING
-if (state != State.CHECKING) {
-String mesg = String.format("CheckInCTL: confirmationNumberEntered : bad state : %s", state);
-throw new RuntimeException(mesg);
-}
-// if confirmed
-if(confirmed) {
-// calls hotel.checkin()
-hotel.checkin(confirmationNumber);
-// calls UI.displayMessage() with Checkin confirmed message
-checkInUI.displayMessage("Checking confired");
-// sets state to COMPLETED
+            // TODO Auto-generated method stub
+            // throws a RuntimeException if state is not CONFIRMING
+            if (state != State.CHECKING) {
+            String mesg = String.format("CheckInCTL: confirmationNumberEntered : bad state : %s", state);
+            throw new RuntimeException(mesg);
+            }
+            // if confirmed
+            if(confirmed) {
+            // calls hotel.checkin()
+            hotel.checkin(confirmationNumber);
+            // calls UI.displayMessage() with Checkin confirmed message
+            checkInUI.displayMessage("Checking confired");
+            // sets state to COMPLETED
 
 
-state = State.COMPLETED;
-// sets UI state to COMPLETED
-checkInUI.setState(CheckinUI.State.COMPLETED);
-}else {
-// calls UI.displayMessage() with Checkin cancelled
-checkInUI.displayMessage("Checking cancelled");
-// sets state to CANCELLED
-state = State.CANCELLED;
-// sets UI state to CANCELLED
-checkInUI.setState(CheckinUI.State.CANCELLED);
-}
-
+            state = State.COMPLETED;
+            // sets UI state to COMPLETED
+            checkInUI.setState(CheckinUI.State.COMPLETED);
+            }else {
+            // calls UI.displayMessage() with Checkin cancelled
+            checkInUI.displayMessage("Checking cancelled");
+            // sets state to CANCELLED
+            state = State.CANCELLED;
+            // sets UI state to CANCELLED
+            checkInUI.setState(CheckinUI.State.CANCELLED);
+            }
+        }
 
 	public void cancel() {
 		checkInUI.displayMessage("Checking in cancelled");
