@@ -6,155 +6,117 @@ import java.util.Map;
 
 import hotel.credit.CreditCard;
 import hotel.utils.IOUtils;
+//Dilan's Entity class
 
 public class Hotel {
-	
-	private Map<Integer, Guest> guests;
-	public Map<RoomType, Map<Integer,Room>> roomsByType;
-	public Map<Long, Booking> bookingsByConfirmationNumber;
-	public Map<Integer, Booking> activeBookingsByRoomId;
-	
-	
-	public Hotel() {
-		guests = new HashMap<>();
-		roomsByType = new HashMap<>();
-		for (RoomType rt : RoomType.values()) {
-			Map<Integer, Room> rooms = new HashMap<>();
-			roomsByType.put(rt, rooms);
-		}
-		bookingsByConfirmationNumber = new HashMap<>();
-		activeBookingsByRoomId = new HashMap<>();
-	}
 
-	
-	public void addRoom(RoomType roomType, int id) {
-		IOUtils.trace("Hotel: addRoom");
-		for (Map<Integer, Room> rooms : roomsByType.values()) {
-			if (rooms.containsKey(id)) {
-				throw new RuntimeException("Hotel: addRoom : room number already exists");
-			}
-		}
-		Map<Integer, Room> rooms = roomsByType.get(roomType);
-		Room room = new Room(id, roomType);
-		rooms.put(id, room);
-	}
+    private Map<Integer, Guest> guests;
+    public Map<RoomType, Map<Integer, Room>> roomsByType;
+    public Map<Long, Booking> bookingsByConfirmationNumber;
+    public Map<Integer, Booking> activeBookingsByRoomId;
 
-	
-	public boolean isRegistered(int phoneNumber) {
-		return guests.containsKey(phoneNumber);
-	}
+    public Hotel() {
+        guests = new HashMap<>();
+        roomsByType = new HashMap<>();
+        for (RoomType rt : RoomType.values()) {
+            Map<Integer, Room> rooms = new HashMap<>();
+            roomsByType.put(rt, rooms);
+        }
+        bookingsByConfirmationNumber = new HashMap<>();
+        activeBookingsByRoomId = new HashMap<>();
+    }
 
-	
-	public Guest registerGuest(String name, String address, int phoneNumber) {
-		if (guests.containsKey(phoneNumber)) {
-			throw new RuntimeException("Phone number already registered");
-		}
-		Guest guest = new Guest(name, address, phoneNumber);
-		guests.put(phoneNumber, guest);		
-		return guest;
-	}
-
-	
-	public Guest findGuestByPhoneNumber(int phoneNumber) {
-		Guest guest = guests.get(phoneNumber);
-		return guest;
-	}
-
-	
-	public Booking findActiveBookingByRoomId(int roomId) {
-		Booking booking = activeBookingsByRoomId.get(roomId);;
-		return booking;
-	}
-
-
-	public Room findAvailableRoom(RoomType selectedRoomType, Date arrivalDate, int stayLength) {
-		IOUtils.trace("Hotel: checkRoomAvailability");
-		Map<Integer, Room> rooms = roomsByType.get(selectedRoomType);
-		for (Room room : rooms.values()) {
-			IOUtils.trace(String.format("Hotel: checking room: %d",room.getId()));
-			if (room.isAvailable(arrivalDate, stayLength)) {
-				return room;
-			}			
-		}
-		return null;
-	}
-
-	
-	public Booking findBookingByConfirmationNumber(long confirmationNumber) {
-		return bookingsByConfirmationNumber.get(confirmationNumber);
-	}
-
-public long book(Room room, Guest guest,Date arrivalDate, int stayLength, int occupantNumber,CreditCard creditCard) {
-		// TODO Auto-generated method stub
-		
-		// A booking should exist for the room (this method should call room.book())
-		Booking booking = room.book(guest, arrivalDate, stayLength, occupantNumber, creditCard);
-		// The room should not be available for the specified arrivalDate and staylength
-		if(booking.getArrivalDate() != arrivalDate && booking.getStayLength() != stayLength) {
-			// The booking should be returned from findBookingByConfirmationNumber()
-			return findBookingByConfirmationNumber(booking.getConfirmationNumber()).getConfirmationNumber();
-		}
-
-              // The Booking referenced by confirmationNumber should have a state of CHECKED_IN
-		if(booking.isCheckedIn()){
-			message = String.format("Booking %d has already been checked in", confirmationNumber);
-		}
-		
-		return 0L;		
-	}
-
-
-	    public void checkin(long confirmationNumber) {
-                // TODO Auto-generated method stub
-
-                // throws a RuntimeException if no booking for confirmation number exists
-                Booking booking = findBookingByConfirmationNumber(confirmationNumber);
-                if (booking.isCheckedIn()) {
-                    String mesg = String.format("CheckIn: confirmationNumberEntered : already exists : %s", confirmationNumber);
-                    throw new RuntimeException(mesg);
-                }
-                String message = null;
-                // The Booking referenced by confirmationNumber should be returned by getActiveBookingByRoomId()
-                if (findActiveBookingByRoomId(booking.getRoomId()).isCheckedIn()) {
-                    message = String.format("Booking %d has already been checked in", confirmationNumber);
-                }
-
-            }
-
-            public void addServiceCharge(int roomId, ServiceType serviceType, double cost) {
-                // TODO Auto-generated method stub
-
-                // throws a RuntimeException if no active booking associated with the room identified by roomID can be found
-                Booking booking = findActiveBookingByRoomId(roomId);
-
-                if (booking.isPending()) {
-                    String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
-                    throw new RuntimeException(mesg);
-                } else // A ServiceCharge should have been added to the active booking.
-                if (!booking.isPending()) {
-                    booking.addServiceCharge(serviceType, cost);
-                }
-
-            }
-
-            public void checkout(int roomId) {
-                // TODO Auto-generated method stub
-
-                // throws a RuntimeException if no active booking associated with the room identified by roomID can be found
-                Booking booking = findActiveBookingByRoomId(roomId);
-                if (booking.isPending()) {
-                    String mesg = String.format("addServiceCharge: roomIdEntered : No active booking associated with the room  : %d", roomId);
-                    throw new RuntimeException(mesg);
-                } else // The Booking referenced by confirmationNumber should have a state of CHECKED_OUT
-                if (!booking.isPending()) {
-
-                    String message = null;
-
-                    if (booking.isCheckedOut()) {
-                        message = String.format("Booking %d has already been checked out", roomId);
-                    }
-
-                }
-
+    public void addRoom(RoomType roomType, int id) {
+        IOUtils.trace("Hotel: addRoom");
+        for (Map<Integer, Room> rooms : roomsByType.values()) {
+            if (rooms.containsKey(id)) {
+                throw new RuntimeException("Hotel: addRoom : room number already exists");
             }
         }
+        Map<Integer, Room> rooms = roomsByType.get(roomType);
+        Room room = new Room(id, roomType);
+        rooms.put(id, room);
+    }
+
+    public boolean isRegistered(int phoneNumber) {
+        return guests.containsKey(phoneNumber);
+    }
+
+    public Guest registerGuest(String name, String address, int phoneNumber) {
+        if (guests.containsKey(phoneNumber)) {
+            throw new RuntimeException("Phone number already registered");
+        }
+        Guest guest = new Guest(name, address, phoneNumber);
+        guests.put(phoneNumber, guest);
+        return guest;
+    }
+
+    public Guest findGuestByPhoneNumber(int phoneNumber) {
+        Guest guest = guests.get(phoneNumber);
+        return guest;
+    }
+
+    public Booking findActiveBookingByRoomId(int roomId) {
+        Booking booking = activeBookingsByRoomId.get(roomId);;
+        return booking;
+    }
+
+    public Room findAvailableRoom(RoomType selectedRoomType, Date arrivalDate, int stayLength) {
+        IOUtils.trace("Hotel: checkRoomAvailability");
+        Map<Integer, Room> rooms = roomsByType.get(selectedRoomType);
+        for (Room room : rooms.values()) {
+            IOUtils.trace(String.format("Hotel: checking room: %d", room.getId()));
+            if (room.isAvailable(arrivalDate, stayLength)) {
+                return room;
+            }
+        }
+        return null;
+    }
+
+    public Booking findBookingByConfirmationNumber(long confirmationNumber) {
+        return bookingsByConfirmationNumber.get(confirmationNumber);
+    }
+
+//implementation of the public long book
+    public long book(Room room, Guest guest,
+            Date arrivalDate, int stayLength, int occupantNumber,
+            CreditCard creditCard) {
+        Booking booking = room.book(guest, arrivalDate, stayLength, occupantNumber, creditCard); //access room entity class's implemented code by other grouo member
+        long confirmationNumber = booking.getConfirmationNumber(); //get returned value of the long variable
+        bookingsByConfirmationNumber.put(Long.valueOf(confirmationNumber), booking); //add values to hash map
+
+        return confirmationNumber; //finaly return the confirmation number
+    }
+
+    public void checkin(long confirmationNumber) {
+        Booking booking = (Booking) bookingsByConfirmationNumber.get(Long.valueOf(confirmationNumber));
+        if (booking == null) { //validation of booking confirmationNumber
+            String message = String.format("Hotel: checkin: No booking details have been found for confirmation number %d", new Object[]{Long.valueOf(confirmationNumber)});
+            throw new RuntimeException(message); //exception handling using throw clause
+        }
+        int roomId = booking.getRoomId(); //get correspondence room id
+
+        booking.checkIn(); //call checking method of booking class
+        activeBookingsByRoomId.put(Integer.valueOf(roomId), booking); //add values to hashmap
+    }
+
+    public void addServiceCharge(int roomId, ServiceType serviceType, double cost) {
+        Booking booking = (Booking) activeBookingsByRoomId.get(Integer.valueOf(roomId));
+        if (booking == null) { //validation of room id
+            String mesg = String.format("Hotel: addServiceCharge: no booking present for room id : %d", new Object[]{Integer.valueOf(roomId)});
+            throw new RuntimeException(mesg); //exception handling using throw clause
+        }
+        booking.addServiceCharge(serviceType, cost); //call addServiceCharge method for calculate service charge
+    }
+
+    public void checkout(int roomId) {
+        Booking booking = (Booking) activeBookingsByRoomId.get(Integer.valueOf(roomId));
+        if (booking == null) { //validate for a valid room id
+            String mesg = String.format("Hotel: checkout: no booking present for room id : %d", new Object[]{Integer.valueOf(roomId)});
+            throw new RuntimeException(mesg); //handle exception
+        }
+        booking.checkOut(); //call checkOut() method
+        activeBookingsByRoomId.remove(Integer.valueOf(roomId)); //make those checkout rooms available by removing them  activeBookingsByRoomId hashmap
+    }
+
+}
