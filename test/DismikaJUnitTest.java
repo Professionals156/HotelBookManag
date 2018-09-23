@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import hotel.entities.Room;
+
 import static org.junit.Assert.*;
 
 /**
  *
- * @author sandun
+ * @author dismika 11634080
  */
 public class DismikaJUnitTest {
     
@@ -42,13 +39,63 @@ public class DismikaJUnitTest {
      @Test
      public void TestCheckIn() {
 
-        Room testRoom = new Room();
-        testRoom.checkIn();
+        Room testRoom = new Room(0, null);
+        testRoom.checkin();
 
-        boolean isReady;
-        boolean expectedResult = true
+        boolean expectedResult = true;
 
-        isReady = testRoom.checkin();
+        boolean isReady = testRoom.isReady();
+        assertEquals(expectedResult,isReady);
+
+
+     }
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import hotel.entities.Room;
+
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author sandun 11634089
+ */
+public class DismikaJUnitTest {
+    
+    public DismikaJUnitTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
+    }
+
+    // TODO add test methods here.
+    // The methods must be annotated with annotation @Test. For example:
+    //
+     @Test
+     public void TestCheckIn() {
+
+        Room testRoom = new Room(0, null);
+        testRoom.checkin();
+
+        boolean expectedResult = true;
+
+        boolean isReady = testRoom.isReady();
         assertEquals(expectedResult,isReady);
 
 
