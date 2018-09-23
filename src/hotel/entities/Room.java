@@ -84,7 +84,12 @@ public class Room {
 
 	public void checkout(Booking booking) throw Exception {
 		// TODO Auto-generated method stub
-
+		if (isReady() == true) {
+			throw new Exception("room is not occupied");
+		}else{
+			isAvailable.remove(booking);
+			state = State.READY;
+		}
 	}
 
 
