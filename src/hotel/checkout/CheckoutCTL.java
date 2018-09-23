@@ -125,7 +125,9 @@ public class CheckoutCTL {
             }
         }
 
+		// add cancle and completed method
 	public void cancel() {
+		// cancle checkout
 		checkoutUI.displayMessage("Checking out cancelled");
 		state = State.CANCELLED;
 		checkoutUI.setState(CheckoutUI.State.CANCELLED);
@@ -133,6 +135,7 @@ public class CheckoutCTL {
 	
 	
 	public void completed() {
+		// comple checkout
 		checkoutUI.displayMessage("Checking out completed");
 	}
 
