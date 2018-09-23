@@ -46,7 +46,14 @@ public class SandunJUnitTest {
     
     @Test
     public void testAddServiceCharge() {
+        Booking booking = new Booking();
+        List<ServiceCharge> chargeList = null; 
         
+        List<ServiceCharge> expectedResult = null;
+        ServiceType serviceType = ServiceType.BAR_FRIDGE;
+        booking.addServiceCharge(serviceType, 300.00);
+        chargeList = booking.getCharges();
+        assertEquals(expectedResult,chargeList);
     }
     
     @Test
