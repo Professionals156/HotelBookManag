@@ -74,9 +74,8 @@ public class Room {
 		// TODO Auto-generated method stub
 		
 		if (isReady() != true) {
-			
 			throw new Exception("room is not availble");
-			state = State.READY;
+			state = State.OCCUPIED;
 		}
 	}
 
@@ -84,18 +83,6 @@ public class Room {
 	public void checkout(Booking booking) throw Exception {
 		// TODO Auto-generated method stub
 
-		for (Guest guest: guests) { 
-   			if (guest.getName() == guestname) { 
-    			Room room = guest.getRoom(); 
-    			if (guest.checkout()) { 
-     				room.setGuest(null); 
-     				room.getSafe().deactivate(); 
-     				room.getSafe().close(); 
-    			} else { 
-     				throw new Exception("Guest couldn't check out"); 
-    			} 
-   			} 
-  		} 
 	}
 
 
