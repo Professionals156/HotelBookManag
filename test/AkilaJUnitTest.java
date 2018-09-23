@@ -39,6 +39,22 @@ public class AkilaJUnitTest {
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void hello() {
+
+        Guest guest;
+        Date bookedArrival;
+        int stayLength;
+        int numberOfOccupants;
+        CreditCard creditCard;
+
+        Room myRoom = new Room();
+
+        Booking booking = new Booking(guest, myRoom, bookedArrival, stayLength, numberOfOccupants, creditCard);
+        myRoom.checkout(booking);
+        boolean expectedResult = true;
+        isReady = myRoom.isReady();
+        assertEquals(expectedResult,isReady);
+    
+    }
 }
