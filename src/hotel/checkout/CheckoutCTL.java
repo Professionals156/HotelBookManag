@@ -106,6 +106,24 @@ throw new RuntimeException(mesg);
 }
 
 
+// creates a new CreditCard
+CreditCard card = new CreditCard(type, number, ccv);
+// calls CreditAuthorizer.authorize()
+// if approved
+if(CreditAuthorizer.getInstance().authorize(card, total)) {
+// calls hotel.checkout()
+hotel.checkout(roomId);
+// calls UI.displayMessage() with Credit card debited message
+checkoutUI.displayMessage("The Total amount debited from your Credit card");
+// sets state to COMPLETED
+state = State.COMPLETED;
+// sets UI state to COMPLETED
+checkoutUI.setState(CheckoutUI.State.COMPLETED);
+}else {
+// calls UI.displayMessage() with Credit not approved message
+checkoutUI.displayMessage("Your Credit card is not approved");
+}
+
 
 	public void cancel() {
 		checkoutUI.displayMessage("Checking out cancelled");
