@@ -73,10 +73,10 @@ public class Room {
 	public void checkin()  {
 		// TODO Auto-generated method stub
 		
-		if (isReady() != true) {
+		if (isReady() != true)
 			throw new Exception("room is not availble");
+		else
 			state = State.OCCUPIED;
-		}
 	}
 
 
