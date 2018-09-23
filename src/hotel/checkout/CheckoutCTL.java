@@ -98,8 +98,13 @@ public class CheckoutCTL {
 
 	
 	public void creditDetailsEntered(CreditCardType type, int number, int ccv) {
-		// TODO Auto-generated method stub
-	}
+// TODO Auto-generated method stub
+// throws a RuntimeException if state is not CREDIT
+if (state != State.CREDIT) {
+String mesg = String.format("CheckoutCTL: creditDetailsEntered : bad state : %s", state);
+throw new RuntimeException(mesg);
+}
+
 
 
 	public void cancel() {
