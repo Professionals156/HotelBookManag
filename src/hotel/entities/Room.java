@@ -72,14 +72,11 @@ public class Room {
 
 	public void checkin()  {
 		// TODO Auto-generated method stub
-		boolean bookingState;
-		boolean roomState;
 		
-		if ( roomState != true ) {
+		if (isReady() != true) {
 			
 			throw new Exception("room is not availble");
-			roomState = true;
-			bookingState = true;
+			state = State.READY;
 		}
 	}
 
