@@ -95,6 +95,19 @@ checkInUI.displayMessage("Checking confired");
 // sets state to COMPLETED
 
 
+state = State.COMPLETED;
+// sets UI state to COMPLETED
+checkInUI.setState(CheckinUI.State.COMPLETED);
+}else {
+// calls UI.displayMessage() with Checkin cancelled
+checkInUI.displayMessage("Checking cancelled");
+// sets state to CANCELLED
+state = State.CANCELLED;
+// sets UI state to CANCELLED
+checkInUI.setState(CheckinUI.State.CANCELLED);
+}
+
+
 
 	public void cancel() {
 		checkInUI.displayMessage("Checking in cancelled");
