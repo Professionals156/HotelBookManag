@@ -135,10 +135,16 @@ public class BookingCTL {
 		}
 	}
 
+public void creditDetailsEntered(CreditCardType type, int number, int ccv) {
+// TODO Auto-generated method stub
+if(state != State.CREDIT) {
+//throws a RuntimeException if state is not CREDIT
+String mesg = String.format("BookingCTL: creditDetailsEntered : bad state : %s", state);
+throw new RuntimeException(mesg);
+}
+// creates a new CreditCard
+CreditCard creditCard = new CreditCard(type, number, ccv);
 
-	public void creditDetailsEntered(CreditCardType type, int number, int ccv) {
-		// TODO Auto-generated method stub
-	}
 
 
 	public void cancel() {
