@@ -56,7 +56,12 @@ public class SandunJUnitTest {
     
     @Test
     public void testCheckOut() {
-        
+        Booking booking = new Booking();
+        booking.checkOut();
+        boolean isCheckout; 
+        boolean expectedResult = true;
+        isCheckout = booking.isCheckedOut();
+        assertEquals(expectedResult,isCheckout);
     }
     
 }
