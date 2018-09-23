@@ -19,9 +19,9 @@ import org.junit.Test;
  *
  * @author sandun
  */
-public class JUnitTest {
+public class SandunJUnitTest {
     
-    public JUnitTest() {
+    public SandunJUnitTest() {
     }
     
     @BeforeClass
